@@ -7,6 +7,8 @@ print(dic1["Age"])
 name = input("Give your name: ")
 age = input("Give your age: ")
 
-dic2 = {name : age}
+dic2 = {"Name" : name, "Age" : age}
 
-print(dic2[name])
+print("Name: " + dic2["Name"] + "\n" + "Age: " + dic2["Age"])
+
+print(dic2.items())
