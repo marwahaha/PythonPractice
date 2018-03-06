@@ -1,4 +1,3 @@
-from pathlib import Path
 import os
 
 #Python file to practice with putting files in a dictionary with their extension
