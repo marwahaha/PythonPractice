@@ -13,7 +13,7 @@ for subdir, dirs, files in os.walk(user_input):
     for file in files:
         current_dir = (os.path.join(subdir, file))
         filename, file_extension = os.path.splitext(current_dir)
-        print(filename)
+        print(filename + file_extension)
         print(file_extension)
 
 #Tussen de haakjes moet een path komen die naar een bestand toe leidt. Dit moet dus elke keer geupdate worden.
