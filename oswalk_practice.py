@@ -2,10 +2,11 @@ import os
 from tqdm import tqdm, trange
 from time import sleep
 
-def dosomething(buf):
+
+def dosomething(file_dict2, path, buf):
     """Do something with the content of a file"""
-    sleep(0.00001)
-    pass
+    file_dict2[path] = {"Extension": 1, "Hash value": 1}
+    return file_dict2
 
 def walkdir(folder):
     """Walk through each files in a directory"""
@@ -15,6 +16,8 @@ def walkdir(folder):
 
 
 def process_content_with_progress3(inputpath, blocksize=1024):
+
+    file_dict = {}
     # Preprocess the total files sizes
     sizecounter = 0
     for filepath in tqdm(walkdir(inputpath), unit="files"):
@@ -28,9 +31,11 @@ def process_content_with_progress3(inputpath, blocksize=1024):
                 buf = 1
                 while (buf):
                     buf = fh.read(blocksize)
-                    dosomething(buf)
+                    dosomething(file_dict, filepath, buf)
                     if buf:
                         pbar.set_postfix(file=filepath[-10:], refresh=False)
                         pbar.update(len(buf))
+    print(len(file_dict))
 
 process_content_with_progress3("/mnt/temp")
+
