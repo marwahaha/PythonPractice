@@ -35,6 +35,7 @@ def process_content_with_progress3(inputpath, blocksize=1024):
                     if buf:
                         pbar.set_postfix(file=filepath[-10:], refresh=False)
                         pbar.update(len(buf))
+    print(file_dict)
     print(len(file_dict))
 
 process_content_with_progress3("/mnt/temp")
