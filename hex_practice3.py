@@ -20,7 +20,7 @@ for filepath in walkdir(dir_input):
         continue
     fh.close()
     with open(filepath, 'rb') as f:
-        content = f.read()
+        content = f.read(1024)
     hex_var = str(binascii.hexlify(content))
     fh = open("D:\Documents\gen_dict.txt", "a")
     fh.write("\n  '" + file_extension + "' : '" + hex_var[2:40] + "',")
