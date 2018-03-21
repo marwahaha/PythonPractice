@@ -13,12 +13,17 @@ def walkdir(folder):
             yield os.path.abspath(os.path.join(dirpath, filename))
 
 for filepath in walkdir(dir_input):
+    fh = open("D:\Documents\gen_dict.txt", "r")
     filename, file_extension = os.path.splitext(filepath)
+    if any(file_extension in s for s in fh.readlines()):
+        fh.close()
+        continue
+    fh.close()
     with open(filepath, 'rb') as f:
         content = f.read()
     hex_var = str(binascii.hexlify(content))
     fh = open("D:\Documents\gen_dict.txt", "a")
-    fh.write("\n  '" + file_extension + "' : '" + hex_var + "',")
+    fh.write("\n  '" + file_extension + "' : '" + hex_var[2:40] + "',")
     fh.close()
 
 test2_file = open("D:\Documents\gen_dict.txt", "a")
