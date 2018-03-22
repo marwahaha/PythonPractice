@@ -4,7 +4,7 @@ import os
 dir_input = input("Give directory input: ")
 test_file = open("D:\Documents\gen_dict.txt", "w")
 test_file.write("Directory analyzed: " + dir_input)
-test_file.write("dic = {")
+test_file.write("\ndic = {")
 test_file.close()
 
 def walkdir(folder):
@@ -24,7 +24,7 @@ for filepath in walkdir(dir_input):
         content = f.read(1024)
     hex_var = str(binascii.hexlify(content))
     fh = open("D:\Documents\gen_dict.txt", "a")
-    fh.write("\n  '" + file_extension + "':'" + hex_var[2:40] + "',")
+    fh.write("\n  '" + file_extension + "': '" + hex_var[2:40] + "',")
     fh.close()
 
 test2_file = open("D:\Documents\gen_dict.txt", "a")
