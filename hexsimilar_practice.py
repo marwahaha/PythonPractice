@@ -250,4 +250,5 @@ for key, value in dic.items():
         old_similarity = similarity
         extension = key
 
-print(extension)
+print(old_similarity)
+print("File format recognized as: " + extension)
