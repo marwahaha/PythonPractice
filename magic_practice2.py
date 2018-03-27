@@ -33,12 +33,16 @@ for filepath in walkdir(input_dir):
 
     output_dic[file_extension] = [curr_magic]
 
-    print(output_dic)
-    """
-    file_write = open(output_file, "a")
-    file_write.write("\n    '" + file_extension + "': '" + curr_magic + "',")
-    file_write.close()
+
+file_write = open(output_file, "a")
+
+for i in output_dic:
+    file_write.write("\n    '" + i + "': [")
+    for value in output_dic[i]:
+        file_write.write("'" + value + "',")
+    file_write.write("],")
+
+file_write.close()
 
 file_write2 = open(output_file, "a")
 file_write2.write("\n}")
-"""
