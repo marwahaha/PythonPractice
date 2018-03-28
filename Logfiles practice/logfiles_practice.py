@@ -10,6 +10,7 @@ def walkdir(folder):
         for filename in files:
             yield os.path.abspath(os.path.join(dirpath, filename))
 
+#Function that checks logfiles for content
 def logfile_check(dir):
     for filepath in walkdir(dir):
         absolute_path, extension = os.path.splitext(filepath)
@@ -20,6 +21,7 @@ def logfile_check(dir):
             open_file = gzip.GzipFile(filepath, "r")
         else:
             print("Not a log file found at: " + filepath)
+            continue
 
 input_dir = input("Give an directory: ")
 logfile_check(input_dir)
