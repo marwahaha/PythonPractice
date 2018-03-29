@@ -16,9 +16,12 @@ def logfile_check(dir):
         absolute_path, extension = os.path.splitext(filepath)
         if file_check.from_file(filepath) == "text/plain":
             open_file = open(filepath, "r")
+            read_file = open_file.readlines()
 
         elif extension == ".gz":
-            open_file = gzip.GzipFile(filepath, "r")
+            open_file = gzip.open(filepath, "r")
+            read_file = open_file.readlines()
+
         else:
             print("Not a log file found at: " + filepath)
             continue
