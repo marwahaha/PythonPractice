@@ -17,8 +17,18 @@ output_dic = {}
 counter = 0
 
 for filepath in walkdir(input_dir):
-    curr_magic = magic.from_file(filepath, mime=True)
+    print(filepath)
     filename, file_extension = os.path.splitext(filepath)
+    if "AppData" in filepath or "/sys" in filepath:
+        continue
+    try:
+        curr_magic = magic.from_file(filepath, mime=True)
+    except FileNotFoundError:
+        continue
+    except PermissionError:
+        continue
+    except OSError:
+        continue
 
     if not str(file_extension):
         continue
