@@ -12,19 +12,26 @@ def walkdir(folder):
 
 #Function that checks logfiles for content
 def logfile_check(dir):
+    failed_logins = []
     for filepath in walkdir(dir):
         absolute_path, extension = os.path.splitext(filepath)
         if file_check.from_file(filepath) == "text/plain":
             open_file = open(filepath, "r")
             read_file = open_file.readlines()
+            for line in read_file:
+                if "failed" in line:
+                    failed_logins.append(line)
 
         elif extension == ".gz":
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
+            for line in read_file:
+                if "failed" in line:
+                    failed_logins.append(line)
 
         else:
             print("Not a log file found at: " + filepath)
             continue
 
 input_dir = input("Give an directory: ")
-logfile_check(input_dir)
+print(logfile_check(input_dir))
