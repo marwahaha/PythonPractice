@@ -1,6 +1,7 @@
 import os
 import magic
 import gzip
+import subprocess
 
 file_check = magic.Magic(mime=True)
 gzip_types = [
@@ -18,14 +19,10 @@ def walkdir(folder):
 def logfile_check(dir):
     failed_logins = []
     for filepath in walkdir(dir):
-        absolute_path, extension = os.path.splitext(filepath)
         if file_check.from_file(filepath) == "text/plain":
-            open_file = open(filepath, "r")
-            read_file = open_file.readlines()
             if "auth" in filepath:
-                for line in read_file:
-                    if "failed" in line and "login" in line:
-                        failed_logins.append(line)
+                sub_out = subprocess.check_output(["grep", "sshd.\*Failed", filepath])
+                print(sub_out)
 
         elif file_check.from_file(filepath) in gzip_types:
             open_file = gzip.open(filepath, "r")
