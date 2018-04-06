@@ -3,6 +3,10 @@ import magic
 import gzip
 
 file_check = magic.Magic(mime=True)
+gzip_types = [
+    "application/x-gzip",
+    "application/gzip"
+]
 
 def walkdir(folder):
     #Walk through each files in a directory
@@ -22,7 +26,7 @@ def logfile_check(dir):
                 if "failed" in line and "login" in line:
                     failed_logins.append(line)
 
-        elif file_check.from_file(filepath) == "application/x-gzip":
+        elif file_check.from_file(filepath) in gzip_types:
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
