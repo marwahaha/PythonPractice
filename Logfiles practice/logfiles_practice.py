@@ -32,6 +32,6 @@ def logfile_check(dir):
         else:
             print("Not a log file found at: " + filepath)
             continue
-
+    return failed_logins
 input_dir = input("Give an directory: ")
 print(logfile_check(input_dir))
