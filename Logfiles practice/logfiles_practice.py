@@ -19,14 +19,14 @@ def logfile_check(dir):
             open_file = open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
-                if "failed" in line:
+                if "failed" in line and "login" in line:
                     failed_logins.append(line)
 
-        elif extension == ".gz":
+        elif file_check.from_file(filepath) == "application/x-gzip":
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
-                if "failed" in str(line):
+                if "failed" in str(line) and "login" in str(line):
                     failed_logins.append(line)
 
         else:
