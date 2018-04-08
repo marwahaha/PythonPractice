@@ -1,5 +1,6 @@
 import datetime
 import os
+import operator
 
 def walkdir(folder):
     #Walk through each files in a directory
@@ -13,7 +14,7 @@ date_list = []
 for filepath in walkdir(dir):
     raw_time = os.path.getmtime(filepath)
     readable_time = datetime.datetime.fromtimestamp(raw_time).strftime('%Y-%m-%d %H:%M:%S')
-    date_list.append(readable_time)
+    date_list.append([filepath, readable_time])
 
-date_list.sort()
+date_list = sorted(date_list, key=operator.itemgetter(1))
 print(date_list)
