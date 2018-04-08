@@ -25,7 +25,7 @@ def logfile_check(dir):
             read_file = open_file.readlines()
             if "auth" in filepath:
                 for line in read_file:
-                    if re.match("sshd.\*Failed", line):
+                    if re.match("(.*)sshd(.*)Failed(.*)", line):
                         failed_logins.append(line)
 
         elif file_check.from_file(filepath) in gzip_types:
