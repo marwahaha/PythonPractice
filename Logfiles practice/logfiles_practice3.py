@@ -23,10 +23,9 @@ def logfile_check(dir):
         if file_check.from_file(filepath) == "text/plain":
             open_file = open(filepath, "r")
             read_file = open_file.readlines()
-            if "auth" in filepath:
-                for line in read_file:
-                    if re.match("(.*)sshd(.*)Failed(.*)password(.*)", line):
-                        failed_logins.append(line)
+            for line in read_file:
+                if re.match("(.*)([Ff]ailed|[Pp]assword)(.*)([Ff]ailed|[Pp]assword)(.*)", line):
+                    failed_logins.append(line)
 
         elif file_check.from_file(filepath) in gzip_types:
             open_file = gzip.open(filepath, "r")
