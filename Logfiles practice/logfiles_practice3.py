@@ -24,14 +24,14 @@ def logfile_check(dir):
             open_file = open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
-                if "failed" in line and "password" in line:
+                if re.match("(?=.*\bFailed\b){1}(?=.*\bPassword\b){1}", line):
                     failed_logins.append(line)
 
         elif file_check.from_file(filepath) in gzip_types:
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
-                if re.match("(?=.*\b[Ff]ailed\b){1}(?=.*\b[Pp]assword\b){1}", str(line)):
+                if re.match("(?=.*\bFailed\b){1}(?=.*\bPassword\b){1}", str(line)):
                     failed_logins.append(line)
 
         else:
