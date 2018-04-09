@@ -2,6 +2,8 @@ import os
 import magic
 import gzip
 import re
+import datetime
+from dateutil import parser
 
 file_check = magic.Magic(mime=True)
 gzip_types = [
@@ -25,6 +27,10 @@ def logfile_check(dir):
             read_file = open_file.readlines()
             for line in read_file:
                 if re.match("((.*)[Ff]ailed(.*)[Pp]assword(.*)|(.*)[Pp]assword(.*)[Ff]ailed(.*))", line):
+                    if "auth" in filepath:
+                        currdate_time = line[:15]
+                        currdate_time = parser.parse(line)
+                        print(currdate_time)
                     failed_logins.append(line)
 
         elif file_check.from_file(filepath) in gzip_types:
