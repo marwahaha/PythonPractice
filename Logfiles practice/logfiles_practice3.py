@@ -28,17 +28,17 @@ def logfile_check(dir):
             for line in read_file:
                 if re.match("((.*)[Ff]ailed(.*)[Pp]assword(.*)|(.*)[Pp]assword(.*)[Ff]ailed(.*))", line):
                     if "auth" in filepath:
-                        currdate_time = line[:15]
-                        currdate_time = parser.parse(line)
-                        print(currdate_time)
-                    failed_logins.append(line)
+                        currdate_time = parser.parse(line[:15])
+                    failed_logins.append([line, currdate_time])
 
         elif file_check.from_file(filepath) in gzip_types:
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
                 if re.match("((.*)[Ff]ailed(.*)[Pp]assword(.*)|(.*)[Pp]assword(.*)[Ff]ailed(.*))", str(line)):
-                    failed_logins.append(line)
+                    if "auth" in filepath:
+                        currdate_time = parser.parse(str(line[:15]))
+                    failed_logins.append([str(line), currdate_time])
 
         else:
             print("Not a log file found at: " + filepath)
