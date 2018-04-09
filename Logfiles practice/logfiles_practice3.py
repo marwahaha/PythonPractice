@@ -31,7 +31,7 @@ def logfile_check(dir):
             open_file = gzip.open(filepath, "r")
             read_file = open_file.readlines()
             for line in read_file:
-                if re.match("(.*)([Ff]ailed|[Pp]assword)(.*)([Ff]ailed|[Pp]assword)(.*)", line):
+                if re.match("(.*)([Ff]ailed|[Pp]assword)(.*)([Ff]ailed|[Pp]assword)(.*)", str(line)):
                     failed_logins.append(line)
 
         else:
