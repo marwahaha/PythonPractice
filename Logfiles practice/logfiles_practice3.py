@@ -39,13 +39,19 @@ def textfile_checker(failed_logins, filepath):
             if re.match("((.*)failed(.*)password(.*)|(.*)password(.*)failed(.*))", line, re.IGNORECASE):
                 raw = os.path.getmtime(filepath)
                 read_time = datetime.datetime.fromtimestamp(raw).strftime('%Y-%m-%d %H:%M:%S')
-                currdate_time = parser.parse(line[:30], fuzzy=True, default=datetime.datetime(int(read_time[:4]), int(read_time[6:7]), int(read_time[9:10])))
+                dy = int(read_time[:4])
+                dm = int(read_time[6:7])
+                dd = int(read_time[9:10])
+                currdate_time = parser.parse(line[:30], fuzzy=True, default=datetime.datetime(dy, dm, dd))
                 failed_logins.append([line, currdate_time])
         else:
             if re.match("((.*)fail(ed)?(.*)login(s)?(.*)|(.*)login(s)?(.*)fail(ed)?(.*))", line, re.IGNORECASE):
                 raw = os.path.getmtime(filepath)
                 read_time = datetime.datetime.fromtimestamp(raw).strftime('%Y-%m-%d %H:%M:%S')
-                currdate_time = parser.parse(line[:30], fuzzy=True, default=datetime.datetime(int(read_time[:4]), int(read_time[6:7]), int(read_time[9:10])))
+                dy = int(read_time[:4])
+                dm = int(read_time[6:7])
+                dd = int(read_time[9:10])
+                currdate_time = parser.parse(line[:30], fuzzy=True, default=datetime.datetime(dy, dm, dd))
                 failed_logins.append([line, currdate_time])
     return failed_logins
 
@@ -57,13 +63,19 @@ def gzip_checker(failed_logins, filepath):
             if re.match("((.*)failed(.*)password(.*)|(.*)password(.*)failed(.*))", str(line), re.IGNORECASE):
                 raw = os.path.getmtime(filepath)
                 read_time = datetime.datetime.fromtimestamp(raw).strftime('%Y-%m-%d %H:%M:%S')
-                currdate_time = parser.parse(str(line)[:30], fuzzy=True, default=datetime.datetime(int(read_time[:4]), int(read_time[6:7]), int(read_time[9:10])))
+                dy = int(read_time[:4])
+                dm = int(read_time[6:7])
+                dd = int(read_time[9:10])
+                currdate_time = parser.parse(str(line)[:30], fuzzy=True, default=datetime.datetime(dy, dm, dd))
                 failed_logins.append([line, currdate_time])
         else:
             if re.match("((.*)fail(ed)?(.*)login(s)?(.*)|(.*)login(s)?(.*)fail(ed)?(.*))", str(line), re.IGNORECASE):
                 raw = os.path.getmtime(filepath)
                 read_time = datetime.datetime.fromtimestamp(raw).strftime('%Y-%m-%d %H:%M:%S')
-                currdate_time = parser.parse(str(line)[:30], fuzzy=True, default=datetime.datetime(int(read_time[:4]), int(read_time[6:7]), int(read_time[9:10])))
+                dy = int(read_time[:4])
+                dm = int(read_time[6:7])
+                dd = int(read_time[9:10])
+                currdate_time = parser.parse(str(line)[:30], fuzzy=True, default=datetime.datetime(dy, dm, dd))
                 failed_logins.append([line, currdate_time])
     return failed_logins
 
